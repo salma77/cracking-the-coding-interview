@@ -24,10 +24,10 @@ public class node {
      * 
      * @param head
      */
-    void removeDup(node head) {
+    void removeDup() {
         HashSet<Integer> set = new HashSet<Integer>();
         node prev = null;
-        node curr = head;
+        node curr = this;
         while (curr != null) {
             if (set.contains(curr.data))
                 prev.next = curr.next;
@@ -45,8 +45,8 @@ public class node {
      * 
      * @param head
      */
-    void removeDupNoBuffer(node head) {
-        node curr = head;
+    void removeDupNoBuffer() {
+        node curr = this;
         while (curr != null) {
             node runner = curr;
             while (runner.next != null) {
@@ -61,4 +61,19 @@ public class node {
         }
     }
 
+    int KthNode(int k) {
+        node curr = this;
+        while (curr != null) {
+            node runner = curr;
+            int count = 0;
+            while (runner.next != null) {
+                count++;
+                runner.next = runner.next.next;
+            }
+            if (count == k)
+                break;
+        }
+        int data2 = curr.data;
+        return data2;
+    }
 }
