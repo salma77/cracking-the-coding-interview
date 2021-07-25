@@ -60,20 +60,25 @@ public class node {
             curr = curr.next;
         }
     }
+    /***
+     * Returns the Kth node from the end of a singly linked list
+     * @param head
+     * @param k
+     * @return
+     */
 
-    int KthNode(int k) {
-        node curr = this;
-        while (curr != null) {
-            node runner = curr;
-            int count = 0;
-            while (runner.next != null) {
-                count++;
-                runner.next = runner.next.next;
-            }
-            if (count == k)
-                break;
+    node KthNode(node head, int k) {
+        node slow = head;
+        node fast = head;
+        for (int i = 0; i < k; i++) {
+            if (fast == null) return null; //NullPointerException thrown
+            fast = fast.next;
         }
-        int data2 = curr.data;
-        return data2;
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
     }
 }
