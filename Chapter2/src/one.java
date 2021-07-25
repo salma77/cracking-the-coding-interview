@@ -1,6 +1,5 @@
 package Chapter2.src;
 
-import Chapter2.src.node;
 
 public class one {
     public static void main(String[] args) throws Exception {

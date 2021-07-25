@@ -19,7 +19,7 @@ public class node {
     }
 
     /***
-     * Removing duplicates from an unsorted singly linkedlist Solution 1: Using a
+     * Removing duplicates from an unsorted singly linkedlist, Solution 1: Using a
      * hashtable
      * 
      * @param head
@@ -40,7 +40,7 @@ public class node {
     }
 
     /***
-     * Removing duplicates from an unsorted singly linkedlist Solution 2: Using a
+     * Removing duplicates from an unsorted singly linkedlist, Solution 2: Using a
      * runner pointer, and no extra buffer
      * 
      * @param head
@@ -60,8 +60,10 @@ public class node {
             curr = curr.next;
         }
     }
+
     /***
      * Returns the Kth node from the end of a singly linked list
+     * 
      * @param head
      * @param k
      * @return
@@ -69,9 +71,10 @@ public class node {
 
     node KthNode(node head, int k) {
         node slow = head;
-        node fast = head;
+        node fast = head; // moves with a pace of k
         for (int i = 0; i < k; i++) {
-            if (fast == null) return null; //NullPointerException thrown
+            if (fast == null)
+                return null; // NullPointerException thrown
             fast = fast.next;
         }
 
@@ -80,5 +83,15 @@ public class node {
             fast = fast.next;
         }
         return slow;
+    }
+    /***
+     * Deletes a node from the middle of a singly linkedlist given access to only the node
+     * @param middle
+     */
+    void deleteMiddle(node middle) {
+        if (middle.next == null)
+            return;
+        middle.data = middle.next.data;
+        middle.next = middle.next.next;
     }
 }
