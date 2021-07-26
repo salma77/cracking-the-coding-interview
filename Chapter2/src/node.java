@@ -154,8 +154,10 @@ public class node {
      */
     node toList(int x) {
         node sum = new node(x % 10);
+
         while (x > 0) {
             x /= 10;
+            
             if (x != 0)
                 sum.appendToTail(x % 10);
         }
@@ -173,6 +175,7 @@ public class node {
     node sumLists(node head) {
         int sum = 0;
         sum += getNumber(head);
+
         while (head != null) {
             if (head.data == '+') {
                 sum += getNumber(head.next);
@@ -183,4 +186,24 @@ public class node {
         return toList(sum);
     }
 
+    /*-----------------------------2.5-Recursion---------------------------------*/
+    node sumListsRecursive(node head1, node head2, int carry) {
+        if (head1 == null && head2 == null && carry == 0)
+            return null;
+
+        int value = carry;
+
+        if (head1 != null)
+            value += head1.data;
+        if (head2 != null)
+            value += head2.data;
+
+        node result = new node(value % 10);
+        if (head1 != null || head2 != null) {
+            node sum = sumListsRecursive(head1 == null ? null : head1.next, head2 == null ? null : head2.next,
+                    value >= 10 ? 1 : 0);
+            result.next = sum;
+        }
+        return result;
+    }
 }
