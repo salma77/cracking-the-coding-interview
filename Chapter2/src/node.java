@@ -125,4 +125,62 @@ public class node {
         tail.next = null;
         return head;
     }
+
+    /*-----------------------------2.5---------------------------------*/
+
+    /***
+     * Form a number from a linked list where the head is the units digit
+     * 
+     * @param head
+     * @return
+     */
+    int getNumber(node head) {
+        int i = 0, num = 0;
+        while (head != null) {
+            if (head.data == '+')
+                break;
+            num += head.data * Math.pow(10, i);
+            i++;
+            head = head.next;
+        }
+        return num;
+    }
+
+    /***
+     * Converts a number to a linkedlist composed of its digits
+     * 
+     * @param x
+     * @return
+     */
+    node toList(int x) {
+        node sum = new node(x % 10);
+        while (x > 0) {
+            x /= 10;
+            if (x != 0)
+                sum.appendToTail(x % 10);
+        }
+        return sum;
+    }
+
+    /***
+     * Gets the sum of two numbers arranged in a linkedlist with the following
+     * format 7 -> 1 -> 6 -> + -> 5 -> 9 -> 2 equivalent to 617 + 295
+     * 
+     * @param head
+     * @return
+     */
+
+    node sumLists(node head) {
+        int sum = 0;
+        sum += getNumber(head);
+        while (head != null) {
+            if (head.data == '+') {
+                sum += getNumber(head.next);
+                break;
+            }
+            head = head.next;
+        }
+        return toList(sum);
+    }
+
 }
