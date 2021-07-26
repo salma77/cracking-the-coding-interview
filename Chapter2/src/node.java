@@ -1,6 +1,7 @@
 package Chapter2.src;
 
 import java.util.HashSet;
+import java.util.Stack;
 
 public class node {
     node next = null;
@@ -10,12 +11,19 @@ public class node {
         data = d;
     }
 
-    void appendToTail(int d) {
+    public void appendToTail(int d) {
         node end = new node(d);
         node n = this;
         while (n.next != null)
             n = n.next;
         n.next = end;
+    }
+
+    public node appendToHead(node head, int d) {
+        node start = new node(d);
+        start.next = head;
+        head = start;
+        return head;
     }
 
     /***
@@ -24,7 +32,7 @@ public class node {
      * 
      * @param head
      */
-    void removeDup() {
+    public void removeDup() {
         HashSet<Integer> set = new HashSet<Integer>();
         node prev = null;
         node curr = this;
@@ -45,7 +53,7 @@ public class node {
      * 
      * @param head
      */
-    void removeDupNoBuffer() {
+    public void removeDupNoBuffer() {
         node curr = this;
         while (curr != null) {
             node runner = curr;
@@ -69,7 +77,7 @@ public class node {
      * @return
      */
 
-    node KthNode(node head, int k) {
+    public node KthNode(node head, int k) {
         node slow = head;
         node fast = head; // moves with a pace of k
         for (int i = 0; i < k; i++) {
@@ -91,7 +99,7 @@ public class node {
      * 
      * @param middle
      */
-    void deleteMiddle(node middle) {
+    public void deleteMiddle(node middle) {
         if (middle.next == null)
             return;
         middle.data = middle.next.data;
@@ -108,7 +116,7 @@ public class node {
      * @return
      * 
      */
-    node partition(node head, int x) {
+    public node partition(node head, int x) {
         node tail = head;
         node curr = head;
         while (curr != null) {
@@ -134,7 +142,7 @@ public class node {
      * @param head
      * @return
      */
-    int getNumber(node head) {
+    public int getNumber(node head) {
         int i = 0, num = 0;
         while (head != null) {
             if (head.data == '+')
@@ -152,12 +160,12 @@ public class node {
      * @param x
      * @return
      */
-    node toList(int x) {
+    public node toList(int x) {
         node sum = new node(x % 10);
 
         while (x > 0) {
             x /= 10;
-            
+
             if (x != 0)
                 sum.appendToTail(x % 10);
         }
@@ -172,7 +180,7 @@ public class node {
      * @return
      */
 
-    node sumLists(node head) {
+    public node sumLists(node head) {
         int sum = 0;
         sum += getNumber(head);
 
@@ -186,8 +194,16 @@ public class node {
         return toList(sum);
     }
 
-    /*-----------------------------2.5-Recursion---------------------------------*/
-    node sumListsRecursive(node head1, node head2, int carry) {
+    /***
+     * Gets the sum of two numbers arranged in a linkedlist with the following
+     * format 7 -> 1 -> 6 -> + -> 5 -> 9 -> 2 equivalent to 617 + 295
+     * 
+     * @param head1
+     * @param head2
+     * @param carry
+     * @return
+     */
+    public node sumListsRecursive(node head1, node head2, int carry) {
         if (head1 == null && head2 == null && carry == 0)
             return null;
 
@@ -205,5 +221,58 @@ public class node {
             result.next = sum;
         }
         return result;
+    }
+
+    /***
+     * To check whether a linkedlist is a palindrome or not
+     * 
+     * @param head
+     * @return
+     */
+    public boolean isPalindrome(node head) {
+        node reverse = null;
+        node curr = head;
+        boolean flag = true;
+        while (curr != null) {
+            reverse = appendToHead(reverse, curr.data);
+            curr = curr.next;
+        }
+        while (head != null) {
+            if (head.data != reverse.data) {
+                flag = false;
+                break;
+            }
+            head = head.next;
+            reverse = reverse.next;
+        }
+        return flag;
+    }
+
+    /***
+     * To check whether a linkedlist is a palindrome or not using a stack
+     * 
+     * @param head
+     * @return
+     */
+    boolean isPalindromeStack(node head) {
+        node runner = head;
+        node curr = head;
+        Stack<Integer> first_half = new Stack<Integer>();
+
+        while (runner != null && runner.next != null) {
+            first_half.push(curr.data); // Note: should implement a new node class with Character data type
+            runner = runner.next.next;
+            curr = curr.next;
+        }
+        // If list length is odd
+        if (runner != null)
+            curr = curr.next;
+
+        while (!first_half.empty()) {
+            if (curr.data != first_half.pop())
+                return false;
+            curr = curr.next;
+        }
+        return true;
     }
 }
