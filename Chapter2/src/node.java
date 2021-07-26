@@ -26,6 +26,13 @@ public class node {
         return head;
     }
 
+    public void insert(node x) {
+        node n = this;
+        while (n.next != null)
+            n = n.next;
+        n.next = x;
+    }
+
     /***
      * Removing duplicates from an unsorted singly linkedlist, Solution 1: Using a
      * hashtable
@@ -275,4 +282,29 @@ public class node {
         }
         return true;
     }
+    /***
+     * Find the intersection node between two linkedlists
+     * Complexity: O(n^2)
+     * 
+     * @param head1
+     * @param head2
+     * @return
+     */
+
+    public node Intersection(node head1, node head2) {
+        node curr1 = head1;
+        node curr2 = head2;
+
+        while (curr2 != null) {
+            while (curr1 != null) {
+                if (curr1 == curr2)
+                    return curr1;
+                curr1 = curr1.next;
+            }
+            curr1=head1;
+            curr2 = curr2.next;
+        }
+        return head1;
+    }
+    
 }
