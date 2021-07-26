@@ -84,8 +84,11 @@ public class node {
         }
         return slow;
     }
+
     /***
-     * Deletes a node from the middle of a singly linkedlist given access to only the node
+     * Deletes a node from the middle of a singly linkedlist given access to only
+     * the node
+     * 
      * @param middle
      */
     void deleteMiddle(node middle) {
@@ -93,5 +96,33 @@ public class node {
             return;
         middle.data = middle.next.data;
         middle.next = middle.next.next;
+    }
+
+    /***
+     * Partition a linkedlist at a certain node, where elements less than pivot are
+     * to the left and those greater than the pivot are to the right, the pivot
+     * itself is anywhere in the right partition
+     * 
+     * @param head
+     * @param x
+     * @return
+     * 
+     */
+    node partition(node head, int x) {
+        node tail = head;
+        node curr = head;
+        while (curr != null) {
+            node next = curr.next; // prevent getting stuck in the loop, as curr.next will be updated
+            if (curr.data < x) {
+                curr.next = head;
+                head = curr;
+            } else if (curr.data >= x) {
+                tail.next = curr;
+                tail = curr;
+            }
+            curr = next;
+        }
+        tail.next = null;
+        return head;
     }
 }
