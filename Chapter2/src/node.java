@@ -282,9 +282,9 @@ public class node {
         }
         return true;
     }
+
     /***
-     * Find the intersection node between two linkedlists
-     * Complexity: O(n^2)
+     * Find the intersection node between two linkedlists Complexity: O(n^2)
      * 
      * @param head1
      * @param head2
@@ -301,10 +301,32 @@ public class node {
                     return curr1;
                 curr1 = curr1.next;
             }
-            curr1=head1;
+            curr1 = head1;
             curr2 = curr2.next;
         }
         return head1;
     }
-    
+
+    //Didn't figure out how to test this one yet
+
+    public node findLoopBeginning(node head) {
+        node fast = head;
+        node slow = head;
+
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow)
+                break;
+        }
+        if (fast == null)
+            return null;
+        slow = head;
+        while (fast != slow) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+
 }
