@@ -1,8 +1,10 @@
 package Chapter3.src;
 
-import java.util.Stack;
+import java.util.*;
 
 public class StacksAndQueues {
-    Stack<Integer> salma = new Stack<Integer>();
 
+    public static void main(String[] args) {
+
+    }
 }
