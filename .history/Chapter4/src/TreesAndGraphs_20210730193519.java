@@ -61,6 +61,7 @@ public class TreesAndGraphs {
         my_graph.addEdge(1, 5);
         my_graph.addEdge(3, 2);
         my_graph.addEdge(4, 1);
+        
         for (int j = 0; j < 6; j++) {
             Iterator<Integer> i = my_graph.getAdj(j).listIterator();
             while (i.hasNext())
@@ -70,7 +71,7 @@ public class TreesAndGraphs {
     }
 
     public static void main(String[] args) throws Exception {
-        testGraph();
-        // testrouteBetween();
+        // testGraph();
+        testrouteBetween();
     }
 }

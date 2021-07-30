@@ -4,7 +4,7 @@ import java.util.*;
 import DataStructures.Graph;
 
 public class TreesAndGraphs {
-    public static boolean routeBetween(Graph g, int start, int end) {
+    public boolean routeBetween(Graph g, int start, int end) {
         boolean visited[] = new boolean[g.getNodes()];
         LinkedList<Integer> queue = new LinkedList<Integer>();
         visited[start] = true;
@@ -23,7 +23,7 @@ public class TreesAndGraphs {
         return visited[end];
     }
 
-    public static void testrouteBetween() {
+    public static void testrouteBetween(int node) {
         Graph my_graph = new Graph(6, false);
         // Linked list representation should be
         // 0--> 1-2-5
@@ -39,8 +39,7 @@ public class TreesAndGraphs {
         my_graph.addEdge(0, 5);
         my_graph.addEdge(1, 5);
         my_graph.addEdge(4, 1);
-        System.out.println(routeBetween(my_graph, 0, 3));
-        System.out.println(routeBetween(my_graph, 1, 2));
+        Syste
     }
 
     public static void testGraph() {
@@ -71,6 +70,5 @@ public class TreesAndGraphs {
 
     public static void main(String[] args) throws Exception {
         testGraph();
-        // testrouteBetween();
     }
 }

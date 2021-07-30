@@ -13,7 +13,7 @@ public class Graph {
         directed = d;
         adj = new LinkedList[v];
         for (int i = 0; i < v; i++)
-            adj[i] = new LinkedList<Integer>();
+            adj[i] = new LinkedList<();
     }
 
     // Function to add an edge between nodes v and w

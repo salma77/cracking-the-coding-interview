@@ -11,6 +11,7 @@ public class Graph {
     public Graph(int v, boolean d) {
         nodes = v;
         directed = d;
+        LinkedList<Integer>[] a = new LinkedList()[v];
         adj = new LinkedList[v];
         for (int i = 0; i < v; i++)
             adj[i] = new LinkedList<Integer>();

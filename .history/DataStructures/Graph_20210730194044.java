@@ -13,7 +13,7 @@ public class Graph {
         directed = d;
         adj = new LinkedList[v];
         for (int i = 0; i < v; i++)
-            adj[i] = new LinkedList<Integer>();
+            adj[i] = new LinkedList();
     }
 
     // Function to add an edge between nodes v and w
@@ -22,12 +22,10 @@ public class Graph {
         if (!directed)
             adj[w].add(v);
     }
-
-    public LinkedList<Integer> getAdj(int node) {
+    public LinkedList<Integer> getAdj(int node){
         return adj[node];
     }
-
-    public int getNodes() {
+    public int getNodes(){
         return nodes;
     }
 
@@ -40,23 +38,23 @@ public class Graph {
         while (!queue.isEmpty()) {
             start = queue.poll();
             Iterator<Integer> i = adj[start].listIterator();
-            while (i.hasNext()) {
-                int n = i.next();
-                if (!visited[n]) {
-                    visited[n] = true;
+            while(i.hasNext()){
+                int n=i.next();
+                if(!visited[n]){
+                    visited[n]=true;
                     queue.add(n);
                 }
             }
         }
     }
 
-    // Function to do recursive part in DFS
-    void DFSrecursion(int node, boolean visited[]) {
-        visited[node] = true;
+    //Function to do recursive part in DFS
+    void DFSrecursion(int node, boolean visited[]){
+        visited[node]=true;
         Iterator<Integer> i = adj[node].listIterator();
-        while (i.hasNext()) {
+        while(i.hasNext()){
             int n = i.next();
-            if (!visited[n])
+            if(!visited[n])
                 DFSrecursion(n, visited);
         }
     }

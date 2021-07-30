@@ -4,7 +4,7 @@ import java.util.*;
 import DataStructures.Graph;
 
 public class TreesAndGraphs {
-    public static boolean routeBetween(Graph g, int start, int end) {
+    public boolean routeBetween(Graph g, int start, int end) {
         boolean visited[] = new boolean[g.getNodes()];
         LinkedList<Integer> queue = new LinkedList<Integer>();
         visited[start] = true;
@@ -22,28 +22,8 @@ public class TreesAndGraphs {
         }
         return visited[end];
     }
-
-    public static void testrouteBetween() {
-        Graph my_graph = new Graph(6, false);
-        // Linked list representation should be
-        // 0--> 1-2-5
-        // 1--> 0-2-5-4
-        // 2--> 0-1-4
-        // 3--> 
-        // 4--> 2-1
-        // 5--> 0-1
-        my_graph.addEdge(0, 1);
-        my_graph.addEdge(0, 2);
-        my_graph.addEdge(2, 1);
-        my_graph.addEdge(4, 2);
-        my_graph.addEdge(0, 5);
-        my_graph.addEdge(1, 5);
-        my_graph.addEdge(4, 1);
-        System.out.println(routeBetween(my_graph, 0, 3));
-        System.out.println(routeBetween(my_graph, 1, 2));
-    }
-
-    public static void testGraph() {
+    public static void testGraph(int node)
+    public static void testGraph(int node) {
         Graph my_graph = new Graph(6, false);
         // Linked list representation should be
         // 0--> 1->2->5
@@ -61,16 +41,19 @@ public class TreesAndGraphs {
         my_graph.addEdge(1, 5);
         my_graph.addEdge(3, 2);
         my_graph.addEdge(4, 1);
-        for (int j = 0; j < 6; j++) {
-            Iterator<Integer> i = my_graph.getAdj(j).listIterator();
-            while (i.hasNext())
-                System.out.println(i.next().intValue());
-            System.out.println("Done =)");
-        }
+        Iterator<Integer> i = my_graph.getAdj(node).listIterator();
+        while (i.hasNext())
+            System.out.println(i.next().intValue());
+
+        System.out.println("Done =)");
     }
 
     public static void main(String[] args) throws Exception {
-        testGraph();
-        // testrouteBetween();
+        testGraph(0);
+        testGraph(1);
+        testGraph(2);
+        testGraph(3);
+        testGraph(4);
+        testGraph(5);
     }
 }

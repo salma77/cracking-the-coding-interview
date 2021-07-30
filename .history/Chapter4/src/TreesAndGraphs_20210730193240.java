@@ -23,7 +23,7 @@ public class TreesAndGraphs {
         return visited[end];
     }
 
-    public static void testrouteBetween() {
+    public static void testrouteBetween(int node) {
         Graph my_graph = new Graph(6, false);
         // Linked list representation should be
         // 0--> 1-2-5
@@ -40,7 +40,7 @@ public class TreesAndGraphs {
         my_graph.addEdge(1, 5);
         my_graph.addEdge(4, 1);
         System.out.println(routeBetween(my_graph, 0, 3));
-        System.out.println(routeBetween(my_graph, 1, 2));
+        System.out.println(routeBetween(my_graph, 0, 3));
     }
 
     public static void testGraph() {
@@ -71,6 +71,5 @@ public class TreesAndGraphs {
 
     public static void main(String[] args) throws Exception {
         testGraph();
-        // testrouteBetween();
     }
 }

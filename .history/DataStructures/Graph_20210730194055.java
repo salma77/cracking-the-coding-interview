@@ -9,11 +9,15 @@ public class Graph {
 
     // Constructor
     public Graph(int v, boolean d) {
-        nodes = v;
+        extracted(v);
         directed = d;
         adj = new LinkedList[v];
         for (int i = 0; i < v; i++)
-            adj[i] = new LinkedList<Integer>();
+            adj[i] = new LinkedList();
+    }
+
+    private int extracted(int v) {
+        return nodes = v;
     }
 
     // Function to add an edge between nodes v and w

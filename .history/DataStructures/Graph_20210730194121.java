@@ -12,8 +12,10 @@ public class Graph {
         nodes = v;
         directed = d;
         adj = new LinkedList[v];
-        for (int i = 0; i < v; i++)
-            adj[i] = new LinkedList<Integer>();
+        for (int i = 0; i < v; i++) {
+            LinkedList linkedList = new LinkedList();
+            adj[i] = linkedList;
+        }
     }
 
     // Function to add an edge between nodes v and w

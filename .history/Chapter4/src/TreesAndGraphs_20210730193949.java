@@ -52,6 +52,7 @@ public class TreesAndGraphs {
         // 3--> 1->2
         // 4--> 2->1
         // 5--> 0->1
+        
         my_graph.addEdge(0, 1);
         my_graph.addEdge(0, 2);
         my_graph.addEdge(2, 1);
@@ -70,7 +71,7 @@ public class TreesAndGraphs {
     }
 
     public static void main(String[] args) throws Exception {
-        testGraph();
-        // testrouteBetween();
+        // testGraph();
+        testrouteBetween();
     }
 }
