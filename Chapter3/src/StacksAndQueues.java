@@ -1,5 +1,8 @@
 package Chapter3.src;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.Stack;
 
 public class StacksAndQueues {
@@ -41,16 +44,33 @@ public class StacksAndQueues {
         // System.out.println(stack1.remove());
         // System.out.println(stack1.isEmpty());
 
-        Stack<Integer> stack1 = new Stack<Integer>();
-        stack1.push(10);
-        stack1.push(99);
-        stack1.push(1);
-        stack1.push(7);
-        sort(stack1);
-        stack1.push(4);
-        stack1.push(3);
-        stack1.push(22);
-        while (!stack1.isEmpty())
-            System.out.println(stack1.pop());
+        // Stack<Integer> stack1 = new Stack<Integer>();
+        // stack1.push(10);
+        // stack1.push(99);
+        // stack1.push(1);
+        // stack1.push(7);
+        // sort(stack1);
+        // stack1.push(4);
+        // stack1.push(3);
+        // stack1.push(22);
+        // while (!stack1.isEmpty())
+        // System.out.println(stack1.pop());
+        Stack<Integer> s = new Stack<>();
+        s.push(5);
+        s.push(2);
+        s.push(3);
+        s.push(4);
+        s.push(0);
+        s.push(1);
+        sort(s);
+
+        assertFalse(s.isEmpty());
+        int count = 0;
+        while (!s.isEmpty()) {
+            int value = s.pop();
+            assertEquals(count, value);
+            assert value == count;
+            count++;
+        }
     }
 }

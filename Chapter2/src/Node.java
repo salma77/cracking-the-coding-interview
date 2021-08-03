@@ -3,31 +3,31 @@ package Chapter2.src;
 import java.util.HashSet;
 import java.util.Stack;
 
-public class node {
-    node next = null;
+public class Node {
+    Node next = null;
     int data;
 
-    public node(int d) {
+    public Node(int d) {
         data = d;
     }
 
     public void appendToTail(int d) {
-        node end = new node(d);
-        node n = this;
+        Node end = new Node(d);
+        Node n = this;
         while (n.next != null)
             n = n.next;
         n.next = end;
     }
 
-    public node appendToHead(node head, int d) {
-        node start = new node(d);
+    public Node appendToHead(Node head, int d) {
+        Node start = new Node(d);
         start.next = head;
         head = start;
         return head;
     }
 
-    public void insert(node x) {
-        node n = this;
+    public void insert(Node x) {
+        Node n = this;
         while (n.next != null)
             n = n.next;
         n.next = x;
@@ -41,8 +41,8 @@ public class node {
      */
     public void removeDup() {
         HashSet<Integer> set = new HashSet<Integer>();
-        node prev = null;
-        node curr = this;
+        Node prev = null;
+        Node curr = this;
         while (curr != null) {
             if (set.contains(curr.data))
                 prev.next = curr.next;
@@ -61,9 +61,9 @@ public class node {
      * @param head
      */
     public void removeDupNoBuffer() {
-        node curr = this;
+        Node curr = this;
         while (curr != null) {
-            node runner = curr;
+            Node runner = curr;
             while (runner.next != null) {
                 // curr runner
                 // a -> b -> c -> d -> e -> f -> g -> null
@@ -77,16 +77,16 @@ public class node {
     }
 
     /***
-     * Returns the Kth node from the end of a singly linked list
+     * Returns the Kth Node from the end of a singly linked list
      * 
      * @param head
      * @param k
      * @return
      */
 
-    public node KthNode(node head, int k) {
-        node slow = head;
-        node fast = head; // moves with a pace of k
+    public Node kthNode(Node head, int k) {
+        Node slow = head;
+        Node fast = head; // moves with a pace of k
         for (int i = 0; i < k; i++) {
             if (fast == null)
                 return null; // NullPointerException thrown
@@ -101,12 +101,12 @@ public class node {
     }
 
     /***
-     * Deletes a node from the middle of a singly linkedlist given access to only
-     * the node
+     * Deletes a Node from the middle of a singly linkedlist given access to only
+     * the Node
      * 
      * @param middle
      */
-    public void deleteMiddle(node middle) {
+    public void deleteMiddle(Node middle) {
         if (middle.next == null)
             return;
         middle.data = middle.next.data;
@@ -114,7 +114,7 @@ public class node {
     }
 
     /***
-     * Partition a linkedlist at a certain node, where elements less than pivot are
+     * Partition a linkedlist at a certain Node, where elements less than pivot are
      * to the left and those greater than the pivot are to the right, the pivot
      * itself is anywhere in the right partition
      * 
@@ -123,11 +123,11 @@ public class node {
      * @return
      * 
      */
-    public node partition(node head, int x) {
-        node tail = head;
-        node curr = head;
+    public Node partition(Node head, int x) {
+        Node tail = head;
+        Node curr = head;
         while (curr != null) {
-            node next = curr.next; // prevent getting stuck in the loop, as curr.next will be updated
+            Node next = curr.next; // prevent getting stuck in the loop, as curr.next will be updated
             if (curr.data < x) {
                 curr.next = head;
                 head = curr;
@@ -149,7 +149,7 @@ public class node {
      * @param head
      * @return
      */
-    public int getNumber(node head) {
+    public int getNumber(Node head) {
         int i = 0, num = 0;
         while (head != null) {
             if (head.data == '+')
@@ -167,8 +167,8 @@ public class node {
      * @param x
      * @return
      */
-    public node toList(int x) {
-        node sum = new node(x % 10);
+    public Node toList(int x) {
+        Node sum = new Node(x % 10);
 
         while (x > 0) {
             x /= 10;
@@ -187,7 +187,7 @@ public class node {
      * @return
      */
 
-    public node sumLists(node head) {
+    public Node sumLists(Node head) {
         int sum = 0;
         sum += getNumber(head);
 
@@ -210,7 +210,7 @@ public class node {
      * @param carry
      * @return
      */
-    public node sumListsRecursive(node head1, node head2, int carry) {
+    public Node sumListsRecursive(Node head1, Node head2, int carry) {
         if (head1 == null && head2 == null && carry == 0)
             return null;
 
@@ -221,9 +221,9 @@ public class node {
         if (head2 != null)
             value += head2.data;
 
-        node result = new node(value % 10);
+        Node result = new Node(value % 10);
         if (head1 != null || head2 != null) {
-            node sum = sumListsRecursive(head1 == null ? null : head1.next, head2 == null ? null : head2.next,
+            Node sum = sumListsRecursive(head1 == null ? null : head1.next, head2 == null ? null : head2.next,
                     value >= 10 ? 1 : 0);
             result.next = sum;
         }
@@ -236,9 +236,9 @@ public class node {
      * @param head
      * @return
      */
-    public boolean isPalindrome(node head) {
-        node reverse = null;
-        node curr = head;
+    public boolean isPalindrome(Node head) {
+        Node reverse = null;
+        Node curr = head;
         boolean flag = true;
         while (curr != null) {
             reverse = appendToHead(reverse, curr.data);
@@ -261,13 +261,13 @@ public class node {
      * @param head
      * @return
      */
-    boolean isPalindromeStack(node head) {
-        node runner = head;
-        node curr = head;
+    boolean isPalindromeStack(Node head) {
+        Node runner = head;
+        Node curr = head;
         Stack<Integer> first_half = new Stack<Integer>();
 
         while (runner != null && runner.next != null) {
-            first_half.push(curr.data); // Note: should implement a new node class with Character data type
+            first_half.push(curr.data); // Note: should implement a new Node class with Character data type
             runner = runner.next.next;
             curr = curr.next;
         }
@@ -284,16 +284,16 @@ public class node {
     }
 
     /***
-     * Find the intersection node between two linkedlists Complexity: O(n^2)
+     * Find the intersection Node between two linkedlists Complexity: O(n^2)
      * 
      * @param head1
      * @param head2
      * @return
      */
 
-    public node Intersection(node head1, node head2) {
-        node curr1 = head1;
-        node curr2 = head2;
+    public Node intersection(Node head1, Node head2) {
+        Node curr1 = head1;
+        Node curr2 = head2;
 
         while (curr2 != null) {
             while (curr1 != null) {
@@ -309,9 +309,9 @@ public class node {
 
     //Didn't figure out how to test this one yet
 
-    public node findLoopBeginning(node head) {
-        node fast = head;
-        node slow = head;
+    public Node findLoopBeginning(Node head) {
+        Node fast = head;
+        Node slow = head;
 
         while (fast != null && fast.next != null) {
             fast = fast.next.next;

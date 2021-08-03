@@ -37,7 +37,7 @@ public class BST {
         if (Math.abs(l_height - r_height) > 1)
             return false;
 
-        return root.getLeft().checkBalance && root.getRight().checkBalance;
+        return root.getLeft().getBalance() && root.getRight().getBalance();
     }
     
 }

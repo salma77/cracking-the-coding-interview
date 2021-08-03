@@ -6,7 +6,7 @@ public class QueueViaStacks<T> {
 
     private Stack<T> front, back;
 
-    QueueViaStacks() {
+    public QueueViaStacks() {
         front = new Stack<T>();
         back = new Stack<T>();
     }

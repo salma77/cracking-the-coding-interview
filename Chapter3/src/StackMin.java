@@ -3,6 +3,7 @@ package Chapter3.src;
 import java.util.EmptyStackException;
 
 public class StackMin {
+    
     private static class NodeMin {
         private int data;
         private int min;

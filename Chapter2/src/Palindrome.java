@@ -1,15 +1,15 @@
 package Chapter2.src;
 
-public class six {
+public class Palindrome {
     public static void main(String[] args) throws Exception {
-        // node n1 = new node(1);
+        // Node n1 = new Node(1);
         // n1.appendToTail(2);
         // n1 = n1.appendToHead(n1, 3);
         // while (n1 != null) {
         // System.out.println(n1.data);
         // n1=n1.next;
         // }
-        node n1 = new node('a');
+        Node n1 = new Node('a');
         n1.appendToTail('s');
         n1.appendToTail('j');
         // n1.appendToTail('s');

@@ -32,7 +32,7 @@ public class Graph {
     }
 
     // Function to do breadth first search
-    void BFS(int start) {
+    public void BFS(int start) {
         boolean visited[] = new boolean[nodes];
         LinkedList<Integer> queue = new LinkedList<Integer>();
         visited[start] = true;
@@ -51,7 +51,7 @@ public class Graph {
     }
 
     // Function to do recursive part in DFS
-    void DFSrecursion(int node, boolean visited[]) {
+    public void DFSrecursion(int node, boolean visited[]) {
         visited[node] = true;
         Iterator<Integer> i = adj[node].listIterator();
         while (i.hasNext()) {
@@ -62,7 +62,7 @@ public class Graph {
     }
 
     // Function to do depth first search
-    void DFS(int start) {
+    public void DFS(int start) {
         boolean visited[] = new boolean[nodes];
         visited[start] = true;
         DFSrecursion(start, visited);

@@ -4,7 +4,7 @@ public class Node {
     private int data;
     private Node left;
     private Node right;
-    public boolean checkBalance;
+    private boolean check_balance;
 
     public Node(int data) {
         this.data = data;
@@ -20,6 +20,10 @@ public class Node {
 
     public Node getRight() {
         return right;
+    }
+
+    public boolean getBalance() {
+        return check_balance;
     }
 
     public void setLeft(Node left) {

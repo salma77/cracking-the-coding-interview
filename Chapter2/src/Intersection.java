@@ -1,8 +1,8 @@
 package Chapter2.src;
-public class seven {
+public class Intersection {
     public static void main(String[] args) throws Exception {
-        node common = new node(777);
-        node n1 = new node(5);
+        Node common = new Node(777);
+        Node n1 = new Node(5);
         n1.appendToTail(3);
         n1.appendToTail(4);
         n1.insert(common);
@@ -11,7 +11,7 @@ public class seven {
         //     System.out.println(n1.data);
         //     n1=n1.next;
         // }
-        node n2 = new node(1);
+        Node n2 = new Node(1);
         n2.appendToTail(3);
         n2.appendToTail(7);
         n2.appendToTail(9);
@@ -22,16 +22,16 @@ public class seven {
         n2.appendToTail(2);
         n2.appendToTail(6);
 
-        node x = n1.Intersection(n1, n2);
+        Node x = n1.intersection(n1, n2);
         System.out.println(x);
         System.out.println(common);
         
-        node n3 = new node(44);
+        Node n3 = new Node(44);
         n3.appendToTail(3);
         n3.appendToTail(2);
         n3.appendToTail(6);
 
-        node n4 = n3;
+        Node n4 = n3;
         n4.appendToTail(3);
         n4.appendToTail(4);
         n4.appendToTail(7);
@@ -40,7 +40,7 @@ public class seven {
         n4.appendToTail(1);
         n4.appendToTail(8);
         
-        // node y = n3.Intersection(n3, n4);
+        // Node y = n3.intersection(n3, n4);
         // System.out.println(y);
         // System.out.println(n3);
         // System.out.println(n4);

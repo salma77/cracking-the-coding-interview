@@ -1,8 +1,8 @@
 package Chapter2.src;
 
-public class four {
+public class Partition {
     public static void main(String[] args) throws Exception {
-        node n1 = new node(2);
+        Node n1 = new Node(2);
         n1.appendToTail(3);
         n1.appendToTail(9);
         n1.appendToTail(1);
