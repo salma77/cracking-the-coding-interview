@@ -1,16 +1,26 @@
-package DataStructures;
+package Chapter4.DataStructures;
 
 public class BST {
     private Node root;
 
-    public BST(int data){
+    // Constructor
+    public BST(int data) {
         root = new Node(data);
     }
 
-    public Node getRoot(){
+    /**
+     * 
+     * @return the root of the binary search tree
+     */
+    public Node getRoot() {
         return root;
     }
 
+    /**
+     * Function to insert a node in a BST
+     * 
+     * @param x integer value to be inserted
+     */
     public void insert(int x) {
         if (root == null)
             root = new Node(x);
@@ -20,6 +30,12 @@ public class BST {
             root.setRight(new Node(x));
     }
 
+    /**
+     * Function to get height of a BST
+     * 
+     * @param root root of the BST
+     * @return height of the tree
+     */
     public int getHeight(Node root) {
         if (root == null)
             return 0;
@@ -28,6 +44,11 @@ public class BST {
         return Math.max(l_height, r_height) + 1;
     }
 
+    /**
+     * Function to check whether a BST is balanced or not
+     * 
+     * @return true, if a tree is balanced
+     */
     public boolean checkBalance() {
         if (root == null)
             return true;
@@ -39,5 +60,5 @@ public class BST {
 
         return root.getLeft().getBalance() && root.getRight().getBalance();
     }
-    
+
 }

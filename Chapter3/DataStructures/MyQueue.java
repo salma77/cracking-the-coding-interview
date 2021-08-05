@@ -1,7 +1,10 @@
-package DataStructures;
+package Chapter3.DataStructures;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Implementation of a queue data structure
+ */
 public class MyQueue<X> {
     private static class QueueNode<X> {
         private X data;
@@ -12,8 +15,13 @@ public class MyQueue<X> {
         }
     }
 
-    private QueueNode<X> first, last;
+    private QueueNode<X> first, last; // First and last elements in the queue
 
+    /**
+     * Function to add item to the end of the queue
+     * 
+     * @param item to be added to the queue
+     */
     public void add(X item) {
         QueueNode<X> new_last = new QueueNode<X>(item);
         if (last != null)
@@ -23,7 +31,12 @@ public class MyQueue<X> {
             first = last;
     }
 
-    public X remove() {
+    /**
+     * Function to remove the first item of the queue
+     * 
+     * @return the removed item
+     */
+    public X remove() throws NoSuchElementException {
         if (first == null)
             throw new NoSuchElementException();
         if (first.next == null)
@@ -33,12 +46,21 @@ public class MyQueue<X> {
         return my_first;
     }
 
-    public X peek() {
+    /**
+     * @return the first element in a queue
+     */
+    public X peek() throws NoSuchElementException {
         if (first == null)
             throw new NoSuchElementException();
         return first.data;
     }
-    public boolean isEmpty(){
+
+    /**
+     * Function to check whether a queue is empty or not
+     * 
+     * @return true, if the queue is empty
+     */
+    public boolean isEmpty() {
         return (first == null);
     }
 }

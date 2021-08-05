@@ -2,6 +2,9 @@ package Chapter3.src;
 
 import java.util.*;
 
+/**
+ * Implementation of a queue using 2 stacks
+ */
 public class QueueViaStacks<T> {
 
     private Stack<T> front, back;

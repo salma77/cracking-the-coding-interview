@@ -2,8 +2,12 @@ package Chapter3.src;
 
 import java.util.EmptyStackException;
 
+/**
+ * Implementation of a stack, which in addition to push and pop, has a function
+ * min that returns the minimum element in O(1) time
+ */
 public class StackMin {
-    
+
     private static class NodeMin {
         private int data;
         private int min;
@@ -21,7 +25,7 @@ public class StackMin {
         return top.min;
     }
 
-    public int pop() {
+    public int pop() throws EmptyStackException {
         if (top == null)
             throw new EmptyStackException();
         int item = top.data;
@@ -40,7 +44,7 @@ public class StackMin {
         top = new_top;
     }
 
-    public int peek() {
+    public int peek() throws EmptyStackException {
         if (top == null)
             throw new EmptyStackException();
         return top.data;

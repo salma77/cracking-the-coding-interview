@@ -33,7 +33,7 @@ public class Node {
         n.next = x;
     }
 
-    /***
+    /**
      * Removing duplicates from an unsorted singly linkedlist, Solution 1: Using a
      * hashtable
      * 

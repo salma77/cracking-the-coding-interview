@@ -2,12 +2,22 @@ package Chapter4.src;
 
 import java.util.*;
 
-import DataStructures.Graph;
-import DataStructures.Node;
+import org.junit.Test;
+
+import Chapter4.DataStructures.Node;
+import Chapter4.DataStructures.Graph;
 
 public class TreesAndGraphs {
+    /**
+     * Function to check if there's a route between two nodes in a graph using BFS
+     * 
+     * @param g     graph where the nodes are
+     * @param start first node
+     * @param end   last node
+     * @return true, if a route between the nodes is found
+     */
     public static boolean routeBetween(Graph g, int start, int end) {
-        
+
         boolean visited[] = new boolean[g.getNodes()];
         LinkedList<Integer> queue = new LinkedList<Integer>();
         visited[start] = true;
@@ -26,6 +36,14 @@ public class TreesAndGraphs {
         return visited[end];
     }
 
+    /**
+     * Function to create a BST with minimum height
+     * 
+     * @param nodes a sorted array of unique values of nodes in the BST
+     * @param start start index in the array
+     * @param end   final index in the array
+     * @return minimum height BST
+     */
     public static Node minBST(int nodes[], int start, int end) {
         if (end < start)
             return null;
@@ -36,6 +54,13 @@ public class TreesAndGraphs {
         return n;
     }
 
+    /**
+     * Function that creates an array list of linked lists, where each linked list
+     * contains nodes at each depth of a certain tree
+     * 
+     * @param root root node of a tree
+     * @return array list of linked lists of nodes at each depth of the tree
+     */
     public static ArrayList<LinkedList<Node>> getDepthList(Node root) {
         ArrayList<LinkedList<Node>> result = new ArrayList<LinkedList<Node>>();
         LinkedList<Node> current = new LinkedList<Node>();
@@ -55,6 +80,14 @@ public class TreesAndGraphs {
         return result;
     }
 
+    /**
+     * Function to check whether a tree is a binary search tree
+     * 
+     * @param root root node of the tree
+     * @param min  minimum value of the tree nodes
+     * @param max  maximum value of the tree nodes
+     * @return
+     */
     public static boolean isBST(Node root, Integer min, Integer max) {
         if (root == null)
             return true;
@@ -65,6 +98,7 @@ public class TreesAndGraphs {
         return true;
     }
 
+    @Test
     public static void testGraph() {
         Graph my_graph = new Graph(6, false);
         // Linked list representation should be
@@ -91,7 +125,7 @@ public class TreesAndGraphs {
         }
     }
 
-    public static void testrouteBetween() {
+    public static void testRouteBetween() {
         Graph my_graph = new Graph(6, false);
         // Linked list representation should be
         // 0--> 1-2-5
@@ -111,15 +145,23 @@ public class TreesAndGraphs {
         System.out.println(routeBetween(my_graph, 1, 2));
     }
 
-    public static void testminBST() {
+    public static void testMinBST() {
         int[] arr = { 1, 5, 8, 12, 16, 21, 23, 24, 32, 37, 41, 55, 67 };
         Node bst = minBST(arr, 0, 12);
         bst.inOrderTraversal(bst);
     }
 
+    public static void testGetDepthList() {
+
+    }
+
+    public static void testIsBST() {
+
+    }
+
     public static void main(String[] args) throws Exception {
         // testGraph();
-        // testrouteBetween();
-        // testminBST();
+        // testRouteBetween();
+        // testMinBST();
     }
 }
