@@ -70,23 +70,6 @@ public class Node {
         return true;
     }
 
-    @Test
-    public void testRemoveDup() {
-        Node n1 = new Node(1);
-        n1.appendToTail(2);
-        n1.appendToTail(3);
-        n1.appendToTail(4);
-        n1.appendToTail(4);
-        n1.appendToTail(3);
-        n1.appendToTail(7);
-        boolean done = n1.removeDup();
-        assertTrue(done);
-        while (n1 != null) {
-            System.out.println(n1.getData());
-            n1 = n1.getNext();
-        }
-    }
-
     /***
      * Removing duplicates from an unsorted singly linkedlist. Solution 2: Using a
      * runner pointer, and no extra buffer
@@ -108,23 +91,6 @@ public class Node {
             curr = curr.next;
         }
         return true;
-    }
-
-    @Test
-    public void testRemoveDupNoBuffer() {
-        Node n1 = new Node(1);
-        n1.appendToTail(2);
-        n1.appendToTail(3);
-        n1.appendToTail(4);
-        n1.appendToTail(4);
-        n1.appendToTail(3);
-        n1.appendToTail(7);
-        boolean done = n1.removeDupNoBuffer();
-        assertTrue(done);
-        while (n1 != null) {
-            System.out.println(n1.getData());
-            n1 = n1.getNext();
-        }
     }
 
     /***
@@ -149,20 +115,6 @@ public class Node {
             fast = fast.next;
         }
         return slow;
-    }
-
-    @Test
-    public void testKthNode() {
-        Node n1 = new Node(1);
-        n1.appendToTail(2);
-        n1.appendToTail(3);
-        n1.appendToTail(4);
-        n1.appendToTail(4);
-        n1.appendToTail(3);
-        n1.appendToTail(7);
-        System.out.println(n1.kthNode(n1, 6).getData());
-        assertEquals(n1.kthNode(n1, 6).getData(), 2);
-        assertEquals(n1.kthNode(n1, 1).getData(), 7);
     }
 
     /***
@@ -205,23 +157,6 @@ public class Node {
         tail.next = null;
         return head;
     }
-
-    @Test
-    public void testPartition() {
-        Node n1 = new Node(2);
-        n1.appendToTail(3);
-        n1.appendToTail(9);
-        n1.appendToTail(1);
-        n1.appendToTail(5);
-        n1.appendToTail(3);
-        n1.appendToTail(7);
-        n1 = n1.partition(n1, 5);
-        while (n1 != null) {
-            System.out.println(n1.getData());
-            n1 = n1.getNext();
-        }
-    }
-
 
     /***
      * Form a number from a linked list where the head is the units digit
@@ -280,25 +215,7 @@ public class Node {
         }
         return toList(sum);
     }
-    @Test
-    public void testSumLists(){
-        Node n1 = new Node(7);
-        n1.appendToTail(7);
-        n1.appendToTail(7);
-        n1.appendToTail(7);
-        n1.appendToTail('+');
-        n1.appendToTail(1);
-        n1.appendToTail(1);
-        n1.appendToTail(1);
-        Node sum = n1.sumLists(n1);
 
-        System.out.println("Function Result: ");
-        while (sum != null) {
-            System.out.println(sum.getData());
-            sum = sum.getNext();
-        }
-        System.out.println("Actual Result: " + (7777 + 111));
-    }
     /***
      * Gets the sum of two numbers arranged in a linkedlist with the following
      * format 7 -> 1 -> 6 -> + -> 5 -> 9 -> 2 equivalent to 617 + 295
@@ -327,21 +244,6 @@ public class Node {
         }
         return result;
     }
-    @Test
-    public void testSumListsRecursive(){
-        Node n1 = new Node(7);
-        n1.appendToTail(7);
-        n1.appendToTail(7);
-        n1.appendToTail(7);
-        Node n2 = new Node(1);
-        n2.appendToTail(1);
-        n2.appendToTail(1);
-        Node n3 = n1.sumListsRecursive(n1, n2, 0);
-        while (n3 != null) {
-            System.out.println(n3.getData());
-            n3 = n3.getNext();
-        }
-    }
 
     /***
      * To check whether a linkedlist is a palindrome or not
@@ -366,15 +268,6 @@ public class Node {
             reverse = reverse.next;
         }
         return flag;
-    }
-    @Test
-    public void testIsPalindrome(){
-        Node n1 = new Node('a');
-        n1.appendToTail('s');
-        n1.appendToTail('j');
-        n1.appendToTail('s');
-        n1.appendToTail('a');
-        assertTrue(isPalindrome(n1));
     }
 
     /***
@@ -404,15 +297,6 @@ public class Node {
         }
         return true;
     }
-    @Test
-    public void testIsPalindromeStack(){
-        Node n1 = new Node('a');
-        // n1.appendToTail('s');
-        // n1.appendToTail('j');
-        // n1.appendToTail('s');
-        // n1.appendToTail('a');
-        assertTrue(isPalindromeStack(n1));
-    }
 
     /***
      * Find the intersection Node between two linkedlists Complexity: O(n^2)
@@ -436,44 +320,6 @@ public class Node {
             curr2 = curr2.next;
         }
         return head1;
-    }
-    @Test
-    public void testIntersection(){
-        //Test case 1
-        Node common = new Node(777);
-        assertNotNull(common);
-        Node n1 = new Node(5);
-        n1.appendToTail(3);
-        n1.appendToTail(4);
-        n1.insert(common);
-        n1.appendToTail(8);
-        Node n2 = new Node(1);
-        n2.appendToTail(3);
-        n2.appendToTail(7);
-        n2.appendToTail(9);
-        n2.appendToTail(22);
-        n2.appendToTail(27);
-        n2.appendToTail(31);
-        n2.insert(common);
-        n2.appendToTail(2);
-        n2.appendToTail(6);
-        assertSame(common, n1.intersection(n1, n2));
-        //Test case 2
-        Node n3 = new Node(44);
-        n3.appendToTail(3);
-        n3.appendToTail(2);
-        n3.appendToTail(6);
-
-        Node n4 = n3;
-        n4.appendToTail(3);
-        n4.appendToTail(4);
-        n4.appendToTail(7);
-        n4.appendToTail(22);
-        n4.appendToTail(9);
-        n4.appendToTail(1);
-        n4.appendToTail(8);
-        
-        assertSame(n3, n4.intersection(n4, n3));
     }
     // Didn't figure out how to test this one yet
 
