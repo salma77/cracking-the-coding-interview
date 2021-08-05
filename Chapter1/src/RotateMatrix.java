@@ -1,5 +1,7 @@
 package Chapter1.src;
 
+import org.junit.Test;
+
 /**
  * Given an image represented by an NxN matrix, where each pixel in the image is
  * 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in
@@ -30,9 +32,8 @@ public class RotateMatrix {
         }
     }
 
-    // Driver code
-    public static void main(String[] args) throws Exception {
-
+    @Test
+    public void testRotateMatrix() {
         int[][] matrix = { { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }, { 11, 12, 13, 14, 15 }, { 16, 17, 18, 19, 20 },
                 { 21, 22, 23, 24, 25 } };
         rotateMatrix(matrix);

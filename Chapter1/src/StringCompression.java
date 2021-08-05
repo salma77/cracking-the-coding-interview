@@ -1,5 +1,9 @@
 package Chapter1.src;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 /**
  * Implement a method to perform basic string compression using the counts of
  * repeated characters. For example, the string aabcccccaaa would become
@@ -30,8 +34,12 @@ public class StringCompression {
         return t.length() > s.length() ? s : t;
     }
 
-    // Driver code
-    public static void main(String[] args) throws Exception {
-        System.out.println(compressString("aabbbcdhhhhhhl"));
+    @Test
+    public void testCompressString() {
+        assertEquals(compressString("aabbbcdhhhhhhl"), "a2b3c1d1h6l1");
+        assertEquals(compressString("a"), "a");
+        assertEquals(compressString("ss"), "s2");
+        assertEquals(compressString(""), "");
     }
+
 }

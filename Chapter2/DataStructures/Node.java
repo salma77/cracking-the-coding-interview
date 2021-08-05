@@ -1,7 +1,10 @@
-package Chapter2.src;
+package Chapter2.DataStructures;
 
-import java.util.HashSet;
-import java.util.Stack;
+import static org.junit.Assert.*;
+
+import java.util.*;
+
+import org.junit.Test;
 
 public class Node {
     Node next = null;
@@ -11,11 +14,23 @@ public class Node {
         data = d;
     }
 
+    public Node getNext() {
+        return this.next;
+    }
+
+    public int getData() {
+        return this.data;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+
     public void appendToTail(int d) {
         Node end = new Node(d);
         Node n = this;
-        while (n.next != null)
-            n = n.next;
+        while (n.getNext() != null)
+            n = n.getNext();
         n.next = end;
     }
 
@@ -39,7 +54,7 @@ public class Node {
      * 
      * @param head
      */
-    public void removeDup() {
+    public boolean removeDup() {
         HashSet<Integer> set = new HashSet<Integer>();
         Node prev = null;
         Node curr = this;
@@ -52,15 +67,33 @@ public class Node {
             }
             curr = curr.next;
         }
+        return true;
+    }
+
+    @Test
+    public void testRemoveDup() {
+        Node n1 = new Node(1);
+        n1.appendToTail(2);
+        n1.appendToTail(3);
+        n1.appendToTail(4);
+        n1.appendToTail(4);
+        n1.appendToTail(3);
+        n1.appendToTail(7);
+        boolean done = n1.removeDup();
+        assertTrue(done);
+        while (n1 != null) {
+            System.out.println(n1.getData());
+            n1 = n1.getNext();
+        }
     }
 
     /***
-     * Removing duplicates from an unsorted singly linkedlist, Solution 2: Using a
+     * Removing duplicates from an unsorted singly linkedlist. Solution 2: Using a
      * runner pointer, and no extra buffer
      * 
      * @param head
      */
-    public void removeDupNoBuffer() {
+    public boolean removeDupNoBuffer() {
         Node curr = this;
         while (curr != null) {
             Node runner = curr;
@@ -73,6 +106,24 @@ public class Node {
                     runner = runner.next;
             }
             curr = curr.next;
+        }
+        return true;
+    }
+
+    @Test
+    public void testRemoveDupNoBuffer() {
+        Node n1 = new Node(1);
+        n1.appendToTail(2);
+        n1.appendToTail(3);
+        n1.appendToTail(4);
+        n1.appendToTail(4);
+        n1.appendToTail(3);
+        n1.appendToTail(7);
+        boolean done = n1.removeDupNoBuffer();
+        assertTrue(done);
+        while (n1 != null) {
+            System.out.println(n1.getData());
+            n1 = n1.getNext();
         }
     }
 
@@ -100,6 +151,20 @@ public class Node {
         return slow;
     }
 
+    @Test
+    public void testKthNode() {
+        Node n1 = new Node(1);
+        n1.appendToTail(2);
+        n1.appendToTail(3);
+        n1.appendToTail(4);
+        n1.appendToTail(4);
+        n1.appendToTail(3);
+        n1.appendToTail(7);
+        System.out.println(n1.kthNode(n1, 6).getData());
+        assertEquals(n1.kthNode(n1, 6).getData(), 2);
+        assertEquals(n1.kthNode(n1, 1).getData(), 7);
+    }
+
     /***
      * Deletes a Node from the middle of a singly linkedlist given access to only
      * the Node
@@ -118,8 +183,8 @@ public class Node {
      * to the left and those greater than the pivot are to the right, the pivot
      * itself is anywhere in the right partition
      * 
-     * @param head
-     * @param x
+     * @param head the first element of a linked list
+     * @param x    the pivot
      * @return
      * 
      */
@@ -141,7 +206,22 @@ public class Node {
         return head;
     }
 
-    /*-----------------------------2.5---------------------------------*/
+    @Test
+    public void testPartition() {
+        Node n1 = new Node(2);
+        n1.appendToTail(3);
+        n1.appendToTail(9);
+        n1.appendToTail(1);
+        n1.appendToTail(5);
+        n1.appendToTail(3);
+        n1.appendToTail(7);
+        n1 = n1.partition(n1, 5);
+        while (n1 != null) {
+            System.out.println(n1.getData());
+            n1 = n1.getNext();
+        }
+    }
+
 
     /***
      * Form a number from a linked list where the head is the units digit
@@ -200,7 +280,25 @@ public class Node {
         }
         return toList(sum);
     }
+    @Test
+    public void testSumLists(){
+        Node n1 = new Node(7);
+        n1.appendToTail(7);
+        n1.appendToTail(7);
+        n1.appendToTail(7);
+        n1.appendToTail('+');
+        n1.appendToTail(1);
+        n1.appendToTail(1);
+        n1.appendToTail(1);
+        Node sum = n1.sumLists(n1);
 
+        System.out.println("Function Result: ");
+        while (sum != null) {
+            System.out.println(sum.getData());
+            sum = sum.getNext();
+        }
+        System.out.println("Actual Result: " + (7777 + 111));
+    }
     /***
      * Gets the sum of two numbers arranged in a linkedlist with the following
      * format 7 -> 1 -> 6 -> + -> 5 -> 9 -> 2 equivalent to 617 + 295
@@ -229,6 +327,21 @@ public class Node {
         }
         return result;
     }
+    @Test
+    public void testSumListsRecursive(){
+        Node n1 = new Node(7);
+        n1.appendToTail(7);
+        n1.appendToTail(7);
+        n1.appendToTail(7);
+        Node n2 = new Node(1);
+        n2.appendToTail(1);
+        n2.appendToTail(1);
+        Node n3 = n1.sumListsRecursive(n1, n2, 0);
+        while (n3 != null) {
+            System.out.println(n3.getData());
+            n3 = n3.getNext();
+        }
+    }
 
     /***
      * To check whether a linkedlist is a palindrome or not
@@ -254,6 +367,15 @@ public class Node {
         }
         return flag;
     }
+    @Test
+    public void testIsPalindrome(){
+        Node n1 = new Node('a');
+        n1.appendToTail('s');
+        n1.appendToTail('j');
+        n1.appendToTail('s');
+        n1.appendToTail('a');
+        assertTrue(isPalindrome(n1));
+    }
 
     /***
      * To check whether a linkedlist is a palindrome or not using a stack
@@ -261,7 +383,7 @@ public class Node {
      * @param head
      * @return
      */
-    boolean isPalindromeStack(Node head) {
+    public boolean isPalindromeStack(Node head) {
         Node runner = head;
         Node curr = head;
         Stack<Integer> first_half = new Stack<Integer>();
@@ -281,6 +403,15 @@ public class Node {
             curr = curr.next;
         }
         return true;
+    }
+    @Test
+    public void testIsPalindromeStack(){
+        Node n1 = new Node('a');
+        // n1.appendToTail('s');
+        // n1.appendToTail('j');
+        // n1.appendToTail('s');
+        // n1.appendToTail('a');
+        assertTrue(isPalindromeStack(n1));
     }
 
     /***
@@ -306,8 +437,45 @@ public class Node {
         }
         return head1;
     }
+    @Test
+    public void testIntersection(){
+        //Test case 1
+        Node common = new Node(777);
+        assertNotNull(common);
+        Node n1 = new Node(5);
+        n1.appendToTail(3);
+        n1.appendToTail(4);
+        n1.insert(common);
+        n1.appendToTail(8);
+        Node n2 = new Node(1);
+        n2.appendToTail(3);
+        n2.appendToTail(7);
+        n2.appendToTail(9);
+        n2.appendToTail(22);
+        n2.appendToTail(27);
+        n2.appendToTail(31);
+        n2.insert(common);
+        n2.appendToTail(2);
+        n2.appendToTail(6);
+        assertSame(common, n1.intersection(n1, n2));
+        //Test case 2
+        Node n3 = new Node(44);
+        n3.appendToTail(3);
+        n3.appendToTail(2);
+        n3.appendToTail(6);
 
-    //Didn't figure out how to test this one yet
+        Node n4 = n3;
+        n4.appendToTail(3);
+        n4.appendToTail(4);
+        n4.appendToTail(7);
+        n4.appendToTail(22);
+        n4.appendToTail(9);
+        n4.appendToTail(1);
+        n4.appendToTail(8);
+        
+        assertSame(n3, n4.intersection(n4, n3));
+    }
+    // Didn't figure out how to test this one yet
 
     public Node findLoopBeginning(Node head) {
         Node fast = head;

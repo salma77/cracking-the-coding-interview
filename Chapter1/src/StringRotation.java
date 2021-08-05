@@ -1,5 +1,9 @@
 package Chapter1.src;
 
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 public class StringRotation {
 
     public static boolean isRotation(String s1, String s2) {
@@ -12,8 +16,10 @@ public class StringRotation {
         return true;
     }
 
-    // Driver code
-    public static void main(String[] args) throws Exception {
-        System.out.println(isRotation("waterbottle", "erbottlewat"));
+    @Test
+    public void testIsRotation() {
+        assertTrue(isRotation("waterbottle", "erbottlewat"));
+        assertFalse(isRotation("waterbottle", "erbottle"));
     }
+
 }
