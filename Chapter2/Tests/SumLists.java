@@ -1,10 +1,12 @@
-package Chapter2.src;
+package Chapter2.Tests;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import Chapter2.DataStructures.Node;
 
-public class sumLists {
+public class SumLists {
 
     @Test
     public void testSumLists() {
@@ -16,14 +18,13 @@ public class sumLists {
         n1.appendToTail(1);
         n1.appendToTail(1);
         n1.appendToTail(1);
-        Node sum = n1.sumLists(n1);
-
-        System.out.println("Function Result: ");
+        Node sum = n1.sumLists();
+        String test = "";
         while (sum != null) {
-            System.out.println(sum.getData());
+            test += sum.getData();
             sum = sum.getNext();
         }
-        System.out.println("Actual Result: " + (7777 + 111));
+        assertEquals(test, "8887");
     }
 
     @Test
@@ -36,10 +37,12 @@ public class sumLists {
         n2.appendToTail(1);
         n2.appendToTail(1);
         Node n3 = n1.sumListsRecursive(n1, n2, 0);
+        String test = "";
         while (n3 != null) {
-            System.out.println(n3.getData());
+            test += n3.getData();
             n3 = n3.getNext();
         }
+        assertEquals(test, "8887");
     }
 
 }

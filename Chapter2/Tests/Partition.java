@@ -1,10 +1,10 @@
-package Chapter2.src;
+package Chapter2.Tests;
 
 import org.junit.Test;
 
 import Chapter2.DataStructures.Node;
 
-public class partition {
+public class Partition {
 
     @Test
     public void testPartition() {
@@ -15,7 +15,7 @@ public class partition {
         n1.appendToTail(5);
         n1.appendToTail(3);
         n1.appendToTail(7);
-        n1 = n1.partition(n1, 5);
+        n1 = n1.partition(5);
         while (n1 != null) {
             System.out.println(n1.getData());
             n1 = n1.getNext();

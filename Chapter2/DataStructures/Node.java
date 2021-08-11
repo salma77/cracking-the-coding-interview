@@ -1,10 +1,6 @@
 package Chapter2.DataStructures;
 
-import static org.junit.Assert.*;
-
 import java.util.*;
-
-import org.junit.Test;
 
 public class Node {
     Node next = null;
@@ -28,10 +24,7 @@ public class Node {
 
     public void appendToTail(int d) {
         Node end = new Node(d);
-        Node n = this;
-        while (n.getNext() != null)
-            n = n.getNext();
-        n.next = end;
+        this.insert(end);
     }
 
     public Node appendToHead(Node head, int d) {
@@ -52,7 +45,7 @@ public class Node {
      * Removing duplicates from an unsorted singly linkedlist, Solution 1: Using a
      * hashtable
      * 
-     * @param head
+     * @return
      */
     public boolean removeDup() {
         HashSet<Integer> set = new HashSet<Integer>();
@@ -74,7 +67,7 @@ public class Node {
      * Removing duplicates from an unsorted singly linkedlist. Solution 2: Using a
      * runner pointer, and no extra buffer
      * 
-     * @param head
+     * @return 
      */
     public boolean removeDupNoBuffer() {
         Node curr = this;
@@ -94,14 +87,14 @@ public class Node {
     }
 
     /***
-     * Returns the Kth Node from the end of a singly linked list
+     * Function to return the Kth Node from the end of a singly linked list
      * 
-     * @param head
      * @param k
      * @return
      */
 
-    public Node kthNode(Node head, int k) {
+    public Node kthNode(int k) {
+        Node head = this;
         Node slow = head;
         Node fast = head; // moves with a pace of k
         for (int i = 0; i < k; i++) {
@@ -130,17 +123,16 @@ public class Node {
         middle.next = middle.next.next;
     }
 
-    /***
+    /**
      * Partition a linkedlist at a certain Node, where elements less than pivot are
      * to the left and those greater than the pivot are to the right, the pivot
      * itself is anywhere in the right partition
      * 
-     * @param head the first element of a linked list
-     * @param x    the pivot
+     * @param x the pivot
      * @return
-     * 
      */
-    public Node partition(Node head, int x) {
+    public Node partition(int x) {
+        Node head = this;
         Node tail = head;
         Node curr = head;
         while (curr != null) {
@@ -198,11 +190,11 @@ public class Node {
      * Gets the sum of two numbers arranged in a linkedlist with the following
      * format 7 -> 1 -> 6 -> + -> 5 -> 9 -> 2 equivalent to 617 + 295
      * 
-     * @param head
      * @return
      */
 
-    public Node sumLists(Node head) {
+    public Node sumLists() {
+        Node head = this;
         int sum = 0;
         sum += getNumber(head);
 
@@ -248,10 +240,10 @@ public class Node {
     /***
      * To check whether a linkedlist is a palindrome or not
      * 
-     * @param head
      * @return
      */
-    public boolean isPalindrome(Node head) {
+    public boolean isPalindrome() {
+        Node head = this;
         Node reverse = null;
         Node curr = head;
         boolean flag = true;
@@ -273,10 +265,10 @@ public class Node {
     /***
      * To check whether a linkedlist is a palindrome or not using a stack
      * 
-     * @param head
      * @return
      */
-    public boolean isPalindromeStack(Node head) {
+    public boolean isPalindromeStack() {
+        Node head = this;
         Node runner = head;
         Node curr = head;
         Stack<Integer> first_half = new Stack<Integer>();
@@ -307,6 +299,8 @@ public class Node {
      */
 
     public Node intersection(Node head1, Node head2) {
+        if (head1 == null || head2 == null)
+            return null;
         Node curr1 = head1;
         Node curr2 = head2;
 
@@ -321,9 +315,9 @@ public class Node {
         }
         return head1;
     }
-    // Didn't figure out how to test this one yet
 
-    public Node findLoopBeginning(Node head) {
+    public Node findLoopBeginning() {
+        Node head = this;
         Node fast = head;
         Node slow = head;
 
