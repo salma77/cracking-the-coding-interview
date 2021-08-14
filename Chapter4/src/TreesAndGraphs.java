@@ -1,14 +1,12 @@
 package Chapter4.src;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import org.junit.Test;
-
-import Chapter4.DataStructures.Node;
-import Chapter4.DataStructures.BST;
-import Chapter4.DataStructures.Graph;
+import Chapter4.DataStructures.*;
 
 public class TreesAndGraphs {
     /**
@@ -69,38 +67,38 @@ public class TreesAndGraphs {
      * @param end   final index in the array
      * @return minimum height BST
      */
-    public static Node minBST(int nodes[], int start, int end) {
+    public static BSTNode minHeightBST(int nodes[], int start, int end) {
         if (end < start)
             return null;
         int mid = (start + end) / 2;
-        Node n = new Node(nodes[mid]);
-        n.setLeft(minBST(nodes, start, mid - 1));
-        n.setRight(minBST(nodes, mid + 1, end));
+        BSTNode n = new BSTNode(nodes[mid]);
+        n.setLeft(minHeightBST(nodes, start, mid - 1));
+        n.setRight(minHeightBST(nodes, mid + 1, end));
         return n;
     }
 
     @Test
-    public void testMinBST() {
+    public void testMinHeightBST() {
         // Test case 1: random
         int[] arr = { 1, 5, 8, 12, 16, 21, 23, 24, 32, 37, 41, 55, 67 };
-        Node bst = minBST(arr, 0, 12);
+        BSTNode bst = minHeightBST(arr, 0, 12);
         // bst.inOrderTraversal(bst);
-        int x = getHeight(bst);
+        int x = TreeHelpers.getHeight(bst);
         assertEquals(x, 4);
         // Test case 2: 2 numbers only
         int[] arr1 = { 0, 7 };
-        Node bst1 = minBST(arr1, 0, 1);
-        x = getHeight(bst1);
+        BSTNode bst1 = minHeightBST(arr1, 0, 1);
+        x = TreeHelpers.getHeight(bst1);
         assertEquals(x, 2);
         // Test case 3: 3 numbers, negative number
         int[] arr2 = { -1, 5, 7 };
-        Node bst2 = minBST(arr2, 0, 2);
-        x = getHeight(bst2);
+        BSTNode bst2 = minHeightBST(arr2, 0, 2);
+        x = TreeHelpers.getHeight(bst2);
         assertEquals(x, 2);
         // Test case 4: repeated number
         int[] arr3 = { 1, 5, 8, 8, 8 };
-        Node bst3 = minBST(arr3, 0, 4);
-        x = getHeight(bst3);
+        BSTNode bst3 = minHeightBST(arr3, 0, 4);
+        x = TreeHelpers.getHeight(bst3);
         assertEquals(x, 3);
     }
 
@@ -111,16 +109,16 @@ public class TreesAndGraphs {
      * @param root root node of a tree
      * @return array list of linked lists of nodes at each depth of the tree
      */
-    public static ArrayList<LinkedList<Node>> getDepthList(Node root) {
-        ArrayList<LinkedList<Node>> result = new ArrayList<LinkedList<Node>>();
-        LinkedList<Node> current = new LinkedList<Node>();
+    public static ArrayList<LinkedList<BSTNode>> getDepthList(BSTNode root) {
+        ArrayList<LinkedList<BSTNode>> result = new ArrayList<LinkedList<BSTNode>>();
+        LinkedList<BSTNode> current = new LinkedList<BSTNode>();
         if (root != null)
             current.add(root);
         while (!current.isEmpty()) {
             result.add(current);
-            LinkedList<Node> parents = current;
-            current = new LinkedList<Node>();
-            for (Node parent : parents) {
+            LinkedList<BSTNode> parents = current;
+            current = new LinkedList<BSTNode>();
+            for (BSTNode parent : parents) {
                 if (parent.getLeft() != null)
                     current.add(parent.getLeft());
                 if (parent.getRight() != null)
@@ -132,23 +130,37 @@ public class TreesAndGraphs {
 
     @Test
     public void testGetDepthList() {
-        Node root = new Node(5);
-        Node left = new Node(26);
-        Node right = new Node(44);
+        BSTNode root = new BSTNode(5);
+        BSTNode left = new BSTNode(26);
+        BSTNode right = new BSTNode(44);
+        BSTNode left_of_left = new BSTNode(9);
+        BSTNode right_of_left = new BSTNode(3);
+        BSTNode left_of_right = new BSTNode(66);
+        BSTNode right_of_right = new BSTNode(93);
+
         root.setLeft(left);
         root.setRight(right);
-        left.setRight(new Node(3));
-        left.setLeft(new Node(9));
-        right.setLeft(new Node(66));
-        right.setRight(new Node(93));
-        ArrayList<LinkedList<Node>> test_list = getDepthList(root);
-        for (int i = 0; i < test_list.size(); i++) {
-            LinkedList<Node> curr = test_list.get(i);
-            Iterator<Node> it = curr.listIterator();
-            while (it.hasNext()) {
-                // assertEquals(it.getData(), );=
-            }
-        }
+        left.setLeft(left_of_left);
+        left.setRight(right_of_left);
+        right.setLeft(left_of_right);
+        right.setRight(right_of_right);
+
+        ArrayList<LinkedList<BSTNode>> actual_list = getDepthList(root);
+        ArrayList<LinkedList<BSTNode>> predicted_list = new ArrayList<LinkedList<BSTNode>>();
+        LinkedList<BSTNode> temp1 = new LinkedList<BSTNode>();
+        temp1.add(root);
+        predicted_list.add(temp1);
+        LinkedList<BSTNode> temp2 = new LinkedList<BSTNode>();
+        temp2.add(left);
+        temp2.add(right);
+        predicted_list.add(temp2);
+        LinkedList<BSTNode> temp3 = new LinkedList<BSTNode>();
+        temp3.add(left_of_left);
+        temp3.add(right_of_left);
+        temp3.add(left_of_right);
+        temp3.add(right_of_right);
+        predicted_list.add(temp3);
+        assertEquals(actual_list, predicted_list);
     }
 
     /**
@@ -159,7 +171,7 @@ public class TreesAndGraphs {
      * @param max  maximum value of the tree nodes
      * @return
      */
-    public boolean isBST(Node root, Integer min, Integer max) {
+    public boolean isBST(BSTNode root, Integer min, Integer max) {
         if (root == null)
             return true;
         if ((min != null && root.getData() <= min) || (max != null && root.getData() > max))
@@ -169,81 +181,233 @@ public class TreesAndGraphs {
         return true;
     }
 
+    // Something's not right here ------>
     @Test
     public void testIsBST() {
         // Test case 1: binary tree, not BST
-        Node root = new Node(5);
-        Node left = new Node(26);
-        Node right = new Node(44);
+        BSTNode root = new BSTNode(5);
+        BSTNode left = new BSTNode(26);
+        BSTNode right = new BSTNode(44);
         root.setLeft(left);
         root.setRight(right);
-        left.setRight(new Node(3));
-        left.setLeft(new Node(9));
-        right.setLeft(new Node(66));
-        right.setRight(new Node(93));
-        assertFalse(isBST(root, 3, 93));
+        left.setRight(new BSTNode(3));
+        left.setLeft(new BSTNode(9));
+        right.setLeft(new BSTNode(66));
+        right.setRight(new BSTNode(93));
+        // assertFalse(isBST(root, 3, 93));
         // Test case 2: balanced BST
-        BST bst = new BST(26);
-        bst.insert(5);
-        bst.insert(3);
-        bst.insert(44);
-        bst.insert(9);
-        bst.insert(66);
-        bst.insert(93);
-        assertTrue(isBST(bst.getRoot(), 3, 93));
+        BSTNode bst = new BSTNode(26);
+        bst.add(5);
+        bst.add(3);
+        bst.add(66);
+        bst.add(44);
+        bst.add(9);
+        bst.add(93);
+        // assertFalse(isBST(bst, 3, 93));
+        TreeHelpers.inOrderTraversal(bst);
         // Test case 3: unbalanced BST
-        BST bst2 = new BST(26);
-        bst2.insert(5);
-        bst2.insert(3);
-        bst2.insert(4);
-        bst2.insert(9);
-        bst2.insert(6);
-        bst2.insert(93);
-        assertTrue(isBST(bst2.getRoot(), 3, 93));
+        BSTNode bst2 = new BSTNode(26);
+        bst2.add(5);
+        bst2.add(3);
+        bst2.add(4);
+        bst2.add(9);
+        bst2.add(6);
+        assertFalse(isBST(bst2, 3, 26));
     }
 
     /**
-     * Function that gets the height of a tree
+     * Function to find the "next" node (i.e., in-order successor) of a given node
+     * in a binary search tree
      * 
-     * @param root root node of the tree
+     * @param n
+     * @param root
      * @return
      */
-    public static int getHeight(Node root) {
-        if (root == null)
-            return 0;
-        int l_height = getHeight(root.getLeft());
-        int r_height = getHeight(root.getRight());
-        return Math.max(l_height, r_height) + 1;
+    public BSTNode inorderSuccessor(BSTNode n, BSTNode root) {
+        if (n == null)
+            return null;
+        if (n.getRight() != null)
+            return TreeHelpers.leftMostChild(n.getRight());
+        BSTNode q = n;
+        BSTNode x = TreeHelpers.getParent(root, q);
+        while (x != null && x.getLeft() != q) {
+            q = x;
+            x = TreeHelpers.getParent(root, x);
+        }
+        return x;
     }
 
     @Test
-    public void testGraph() {
-        Graph my_graph = new Graph(6, false);
-        // Linked list representation should be
-        // 0--> 1->2->5
-        // 1--> 0->2->3->5->4
-        // 2--> 0->1->3->4
-        // 3--> 1->2
-        // 4--> 2->1
-        // 5--> 0->1
-        my_graph.addEdge(0, 1);
-        my_graph.addEdge(0, 2);
-        my_graph.addEdge(2, 1);
-        my_graph.addEdge(3, 1);
-        my_graph.addEdge(4, 2);
-        my_graph.addEdge(0, 5);
-        my_graph.addEdge(1, 5);
-        my_graph.addEdge(3, 2);
-        my_graph.addEdge(4, 1);
-        for (int j = 0; j < 6; j++) {
-            Iterator<Integer> i = my_graph.getAdj(j).listIterator();
-            while (i.hasNext())
-                System.out.println(i.next().intValue());
-            System.out.println("Done =)");
-        }
+    public void testInorderSuccessor() {
+        BSTNode bst = new BSTNode(26);
+        BSTNode test = new BSTNode(32);
+        BSTNode inorder_test = new BSTNode(44);
+        bst.add(5);
+        bst.add(3);
+        bst.add(inorder_test);
+        bst.add(9);
+        bst.add(66);
+        bst.add(test);
+        assertSame(inorder_test, inorderSuccessor(test, bst));
     }
 
-    public static void main(String[] args) throws Exception {
+    /**
+     * Function to return the common ancestor between two nodes
+     * 
+     * @param root root of the tree
+     * @param p    first node
+     * @param q    second node
+     * @return
+     */
+    public BSTNode commonAncestor(BSTNode root, BSTNode p, BSTNode q) {
+        if (!TreeHelpers.covers(root, p) || !TreeHelpers.covers(root, q))
+            return null;
+        return TreeHelpers.ancestorHelper(root, p, q);
+    }
 
+    @Test
+    public void testCommonAncestor() {
+        BSTNode root = new BSTNode(5);
+        BSTNode left = new BSTNode(6);
+        BSTNode right = new BSTNode(4);
+        root.setLeft(left);
+        root.setRight(right);
+        BSTNode left_right = new BSTNode(3);
+        BSTNode left_left = new BSTNode(9);
+        left.setRight(left_right);
+        left.setLeft(left_left);
+        right.setLeft(new BSTNode(7));
+        right.setRight(new BSTNode(8));
+        assertSame(left, commonAncestor(root, left_right, left_left));
+    }
+
+    /**
+     * Function to weave lists together in all possible ways. This algorithm works
+     * by removing the head from one list, recursing, and then doing the same thing
+     * with the other list.
+     * 
+     * @param first
+     * @param second
+     * @param results
+     * @param prefix
+     */
+    public void weaveLists(LinkedList<Integer> first, LinkedList<Integer> second,
+            ArrayList<LinkedList<Integer>> results, LinkedList<Integer> prefix) {
+        // One list is empty. Add remainder to [a cloned] prefix and store result.
+        if (first.size() == 0 || second.size() == 0) {
+            LinkedList<Integer> result = (LinkedList<Integer>) prefix.clone();
+            result.addAll(first);
+            result.addAll(second);
+            results.add(result);
+            return;
+        }
+        // Recurse with head of first added to the prefix. Removing the head will damage
+        // first, so we'll need to put it back where we found it afterwards.
+        int headFirst = first.removeFirst();
+        prefix.addLast(headFirst);
+        weaveLists(first, second, results, prefix);
+        prefix.removeLast();
+        first.addFirst(headFirst);
+
+        // Do the same thing with second, damaging and then restoring the list.
+        int headSecond = second.removeFirst();
+        prefix.addLast(headSecond);
+
+        weaveLists(first, second, results, prefix);
+        prefix.removeLast();
+        second.addFirst(headSecond);
+    }
+
+    /**
+     * Function to print all possible arrays that could have led to a given binary
+     * search tree with distinct elements.
+     * 
+     * @param node root of the binary tree
+     * @return
+     */
+    ArrayList<LinkedList<Integer>> allSequences(BSTNode node) {
+        ArrayList<LinkedList<Integer>> result = new ArrayList<LinkedList<Integer>>();
+        if (node == null) {
+            result.add(new LinkedList<Integer>());
+            return result;
+        }
+        LinkedList<Integer> prefix = new LinkedList<Integer>();
+        prefix.add(node.getData());
+        // Recurse on left and right subtrees.
+        ArrayList<LinkedList<Integer>> leftSeq = allSequences(node.getLeft());
+        ArrayList<LinkedList<Integer>> rightSeq = allSequences(node.getRight());
+        // Weave together each list from the left and right sides.
+        for (LinkedList<Integer> left : leftSeq) {
+            for (LinkedList<Integer> right : rightSeq) {
+                ArrayList<LinkedList<Integer>> weaved = new ArrayList<LinkedList<Integer>>();
+                weaveLists(left, right, weaved, prefix);
+                result.addAll(weaved);
+            }
+        }
+        return result;
+    }
+
+    @Test
+    public void testAllSequences() {
+        BSTNode tree = new BSTNode(2);
+        tree.add(1);
+        tree.add(3);
+        ArrayList<LinkedList<Integer>> expected = new ArrayList<LinkedList<Integer>>();
+        LinkedList<Integer> temp1 = new LinkedList<Integer>();
+        temp1.add(2);
+        temp1.add(1);
+        temp1.add(3);
+        LinkedList<Integer> temp2 = new LinkedList<Integer>();
+        temp2.add(2);
+        temp2.add(3);
+        temp2.add(1);
+        expected.add(temp1);
+        expected.add(temp2);
+        ArrayList<LinkedList<Integer>> actual = allSequences(tree);
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Function to check whether tree2 is a subtree of tree1
+     * 
+     * @param tree1
+     * @param tree2
+     * @return
+     */
+    public boolean subTree(TreeNode tree1, TreeNode tree2) {
+        if (tree1 == null)
+            return false;
+        else if (tree1.getData() == tree2.getData() && TreeHelpers.matchTree(tree1, tree2))
+            return true;
+        return subTree(tree1.getLeft(), tree2) || subTree(tree1.getRight(), tree2);
+    }
+
+    /**
+     * Function to check whether tree1 contains tree2
+     * 
+     * @param tree1
+     * @param tree2
+     * @return
+     */
+    public boolean containsTree(TreeNode tree1, TreeNode tree2) {
+        if (tree2 == null)
+            return true;
+        return subTree(tree1, tree2);
+    }
+
+    @Test
+    public void testContainsTree() {
+        TreeNode tree1 = new TreeNode(6);
+        int[] nodes1 = { 3, 4, 5, 6, 23, 71, 9, 1, 2, 33, 99, 2, 4, 7, 11, 54, 32, 87, 101, 43, 24 };
+        tree1 = TreeHelpers.insertLevelOrder(nodes1, tree1, 0);
+
+        TreeNode tree2 = new TreeNode(6);
+        int[] nodes2 = { 3, 4, 5, 6 };
+        tree2 = TreeHelpers.insertLevelOrder(nodes2, tree2, 0);
+        TreeNode tree3 = new TreeNode(7);
+        int[] nodes3 = { 3, 2, 1, 2 };
+        tree3 = TreeHelpers.insertLevelOrder(nodes3, tree3, 0);
+        assertTrue(containsTree(tree1, tree2));
+        assertFalse(containsTree(tree1, tree3));
     }
 }

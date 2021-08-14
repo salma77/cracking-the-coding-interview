@@ -6,7 +6,7 @@ import java.util.*;
  * Implementation of Graph using a Hashmap
  */
 
-class Graph2<T> {
+class HashMapGraph<T> {
 
     // Hashmap to store the edges in the graph
     private Map<T, List<T>> map = new HashMap<>();
