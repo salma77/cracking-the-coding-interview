@@ -13,37 +13,37 @@ public class Intersection {
         // Test case 1
         Node common = new Node(777);
         assertNotNull(common);
-        Node n1 = new Node(5);
-        n1.appendToTail(3);
-        n1.appendToTail(4);
-        n1.insert(common);
-        n1.appendToTail(8);
-        Node n2 = new Node(1);
-        n2.appendToTail(3);
-        n2.appendToTail(7);
-        n2.appendToTail(9);
-        n2.appendToTail(22);
-        n2.appendToTail(27);
-        n2.appendToTail(31);
-        n2.insert(common);
-        n2.appendToTail(2);
-        n2.appendToTail(6);
-        assertSame(common, n1.intersection(n1, n2));
+        Node node1 = new Node(5);
+        node1.appendToTail(3);
+        node1.appendToTail(4);
+        node1.insert(common);
+        node1.appendToTail(8);
+        Node node2 = new Node(1);
+        node2.appendToTail(3);
+        node2.appendToTail(7);
+        node2.appendToTail(9);
+        node2.appendToTail(22);
+        node2.appendToTail(27);
+        node2.appendToTail(31);
+        node2.insert(common);
+        node2.appendToTail(2);
+        node2.appendToTail(6);
+        assertSame(common, node1.intersection(node1, node2));
         // Test case 2
-        Node n3 = new Node(44);
-        n3.appendToTail(3);
-        n3.appendToTail(2);
-        n3.appendToTail(6);
+        Node node3 = new Node(44);
+        node3.appendToTail(3);
+        node3.appendToTail(2);
+        node3.appendToTail(6);
 
-        Node n4 = n3;
-        n4.appendToTail(3);
-        n4.appendToTail(4);
-        n4.appendToTail(7);
-        n4.appendToTail(22);
-        n4.appendToTail(9);
-        n4.appendToTail(1);
-        n4.appendToTail(8);
+        Node node4 = node3;
+        node4.appendToTail(3);
+        node4.appendToTail(4);
+        node4.appendToTail(7);
+        node4.appendToTail(22);
+        node4.appendToTail(9);
+        node4.appendToTail(1);
+        node4.appendToTail(8);
 
-        assertSame(n3, n4.intersection(n4, n3));
+        assertSame(node3, node4.intersection(node4, node3));
     }
 }

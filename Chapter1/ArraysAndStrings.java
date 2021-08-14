@@ -10,7 +10,7 @@ public class ArraysAndStrings {
      * and counting the character repeats, check if the current character is the
      * same as the next character. If not, add its compressed version to the result.
      * 
-     * @param s the string to be compressed
+     * @param str the string to be compressed
      * @return
      */
     public static String compressString(String str) {
