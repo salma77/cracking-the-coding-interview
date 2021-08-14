@@ -22,7 +22,7 @@ public class MyQueue<X> {
      * 
      * @param item to be added to the queue
      */
-    public void add(X item) {
+    public void enqueue(X item) {
         QueueNode<X> new_last = new QueueNode<X>(item);
         if (last != null)
             last.next = new_last;
@@ -36,7 +36,7 @@ public class MyQueue<X> {
      * 
      * @return the removed item
      */
-    public X remove() throws NoSuchElementException {
+    public X dequeue() throws NoSuchElementException {
         if (first == null)
             throw new NoSuchElementException();
         if (first.next == null)
