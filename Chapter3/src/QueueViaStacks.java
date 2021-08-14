@@ -14,11 +14,11 @@ public class QueueViaStacks<T> {
         back = new Stack<T>();
     }
 
-    public void add(T item) {
+    public void enqueue(T item) {
         back.push(item);
     }
 
-    public T remove() {
+    public T dequeue() {
         if (front.isEmpty()) {
             while (!back.isEmpty()) {
                 front.push(back.pop());

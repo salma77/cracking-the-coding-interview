@@ -1,12 +1,9 @@
 package Chapter2.Tests;
 
-import org.junit.Test;
-
 import Chapter2.DataStructures.Node;
 
 public class Partition {
 
-    @Test
     public void testPartition() {
         Node n1 = new Node(2);
         n1.appendToTail(3);

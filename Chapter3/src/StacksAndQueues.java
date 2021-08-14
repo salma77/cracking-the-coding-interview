@@ -1,12 +1,9 @@
 package Chapter3.src;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Test;
 import java.util.*;
-
-import org.junit.Test;
 
 public class StacksAndQueues {
     /**
@@ -118,18 +115,15 @@ public class StacksAndQueues {
     @Test
     public void testQueueViaStacks() {
         QueueViaStacks<Integer> stack1 = new QueueViaStacks<Integer>();
-        stack1.add(10);
-        stack1.add(12);
-        stack1.add(16);
-        assertEquals(stack1.remove(), Integer.valueOf(10));
-        stack1.add(18);
-        assertEquals(stack1.remove(), Integer.valueOf(12));
-        assertEquals(stack1.remove(), Integer.valueOf(16));
-        assertEquals(stack1.remove(), Integer.valueOf(18));
+        stack1.enqueue(10);
+        stack1.enqueue(12);
+        stack1.enqueue(16);
+        assertEquals(stack1.dequeue(), Integer.valueOf(10));
+        stack1.enqueue(18);
+        assertEquals(stack1.dequeue(), Integer.valueOf(12));
+        assertEquals(stack1.dequeue(), Integer.valueOf(16));
+        assertEquals(stack1.dequeue(), Integer.valueOf(18));
         assertTrue(stack1.isEmpty());
     }
 
-    public static void main(String[] args) {
-
-    }
 }
