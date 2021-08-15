@@ -44,7 +44,6 @@ public class BSTNode {
         if (current == null) {
             return value;
         }
-
         if (value.getData() < current.getData()) {
             current.left = addRecursive(current.left, value);
         } else if (value.getData() > current.getData()) {
@@ -53,7 +52,6 @@ public class BSTNode {
             // value already exists
             return current;
         }
-
         return current;
     }
 

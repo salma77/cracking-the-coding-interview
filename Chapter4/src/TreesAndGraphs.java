@@ -407,7 +407,88 @@ public class TreesAndGraphs {
         TreeNode tree3 = new TreeNode(7);
         int[] nodes3 = { 3, 2, 1, 2 };
         tree3 = TreeHelpers.insertLevelOrder(nodes3, tree3, 0);
+
         assertTrue(containsTree(tree1, tree2));
         assertFalse(containsTree(tree1, tree3));
+    }
+
+    @Test
+    public void testRandomTreeNode() {
+        RandomTreeNode tree = new RandomTreeNode(5);
+        tree.insertInOrder(6);
+        tree.insertInOrder(7);
+        tree.insertInOrder(2);
+        tree.insertInOrder(53);
+        tree.insertInOrder(42);
+        tree.insertInOrder(99);
+        RandomTreeNode found = tree.find(53);
+        assertEquals(53, found.data());
+
+        int random_node = tree.getRandomNode().data();
+        found = tree.find(random_node);
+        assertEquals(random_node, found.data());
+    }
+
+    /**
+     * Function to count paths that lead to a certain sum
+     * 
+     * @param root
+     * @param target_sum
+     * @return
+     */
+    public int countPathsWithSum(TreeNode root, int target_sum) {
+        return countPathsWithSum(root, target_sum, 0, new HashMap<Integer, Integer>());
+    }
+
+    /**
+     * Function to track a running sum and check whether we reached the target
+     * 
+     * @param node
+     * @param target_sum
+     * @param running_sum
+     * @param path_count
+     * @return
+     */
+    public int countPathsWithSum(TreeNode node, int target_sum, int running_sum, HashMap<Integer, Integer> path_count) {
+        if (node == null)
+            return 0;
+        running_sum += node.getData();
+        int sum = running_sum - target_sum;
+        int total_paths = path_count.getOrDefault(sum, 0);
+        if (running_sum == target_sum)
+            total_paths++;
+        incrementHashTable(path_count, running_sum, 1);
+        total_paths += countPathsWithSum(node.getLeft(), target_sum, running_sum, path_count);
+        total_paths += countPathsWithSum(node.getRight(), target_sum, running_sum, path_count);
+        incrementHashTable(path_count, running_sum, -1);
+        return total_paths;
+    }
+
+    /**
+     * Function to increment the hashtable used to find the running sum
+     * 
+     * @param hashtable
+     * @param key
+     * @param delta
+     */
+    public void incrementHashTable(HashMap<Integer, Integer> hashtable, int key, int delta) {
+        int new_count = hashtable.getOrDefault(key, 0) + delta;
+        if (new_count == 0)
+            hashtable.remove(key);
+        else
+            hashtable.put(key, new_count);
+    }
+
+    @Test
+    public void testCountPathsWithSum() {
+        TreeNode root = new TreeNode(6);
+        int[] nodes1 = { 3, 4, 5, 1, 23, -1, 24, -2, 7, -22, 1, 1, 5, -24, 3 };
+        root = TreeHelpers.insertLevelOrder(nodes1, root, 0);
+        int count = countPathsWithSum(root, 8);
+        assertEquals(count, 6);
+        int[] nodes2 = { -1, -1, -1, -1, -1, -1, -1, -1 };
+        root = TreeHelpers.insertLevelOrder(nodes2, root, 0);
+        count = countPathsWithSum(root, -3);
+        assertEquals(count, 5);
     }
 }

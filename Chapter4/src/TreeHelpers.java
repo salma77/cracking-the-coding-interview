@@ -180,10 +180,10 @@ public class TreeHelpers {
      * by removing the head from one list, recursing, and then doing the same thing
      * with the other list.
      * 
-     * @param first
-     * @param second
-     * @param results
-     * @param prefix
+     * @param first   first list to be weaved
+     * @param second  second list to be weaved
+     * @param results array of resulted lists
+     * @param prefix  prefix to add remainder of the list to
      * @return
      */
     public static void weaveLists(LinkedList<Integer> first, LinkedList<Integer> second,
@@ -216,19 +216,20 @@ public class TreeHelpers {
     /**
      * Function to check whether two subtrees have the same nodes
      * 
-     * @param node1
-     * @param node2
+     * @param subtree1
+     * @param subtree2
      * @return
      */
-    public static boolean matchTree(TreeNode node1, TreeNode node2) {
-        if (node1 == null && node2 == null)
+    public static boolean matchTree(TreeNode subtree1, TreeNode subtree2) {
+        if (subtree1 == null && subtree2 == null)
             return true;
-        else if (node1 == null || node2 == null)
-            return false;
-        else if (node1.getData() != node2.getData())
+        else if (subtree1 == null || subtree2 == null)
+            return true;
+        else if (subtree1.getData() != subtree2.getData())
             return false;
         else
-            return matchTree(node1.getLeft(), node2.getLeft()) && matchTree(node1.getRight(), node2.getRight());
+            return matchTree(subtree1.getLeft(), subtree2.getLeft())
+                    && matchTree(subtree1.getRight(), subtree2.getRight());
     }
 
 }
