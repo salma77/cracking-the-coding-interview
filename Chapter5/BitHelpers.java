@@ -152,18 +152,6 @@ public class BitHelpers {
         return countOnes(n);
     }
 
-    public static void getZeroIndices(int num, int[] indices) {
-        int i = 0;
-        int j = 0;
-        while (i<Math.floor(Math.log(num) / Math.log(2))) {
-            if (!getBit(num, i)) {
-                indices[j] = i;
-                j++;
-            }
-            i++;
-        }
-    }
-
     /**
      * Function to check whether a number is a power of 2 or equals zero
      * 

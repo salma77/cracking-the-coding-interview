@@ -4,6 +4,24 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BitManipulation {
+    @Test
+    public void testBitHelpers() {
+        assertEquals(-5, BitHelpers.repeatedRightArithmeticShift(-18, 2));// (-18=11111101110) =RSA=> (111011=-5)
+        assertEquals(0, BitHelpers.repeatedRightLogicalShift(7, 3));
+        assertTrue(BitHelpers.getBit(5, 2));
+        assertEquals(7, BitHelpers.setBit(5, 1));
+        assertEquals(5, BitHelpers.clearBit(7, 1));
+        assertEquals(5, BitHelpers.updateBit(7, 1, false));
+        assertEquals(3, BitHelpers.clearBitsMSBthroughI(27, 2));
+        assertEquals(24, BitHelpers.clearBitsithrough0(27, 2));
+        assertEquals(17, BitHelpers.clearBitsithroughj(27, 1, 3));
+        assertEquals(18, BitHelpers.onesComplement(45));
+        assertEquals(4, BitHelpers.countOnes(45));
+        assertEquals(2, BitHelpers.countZeros(45));
+        assertTrue(BitHelpers.isPowerOfTwo(16));
+        assertFalse(BitHelpers.isPowerOfTwo(19));
+    }
+
     /**
      * Function to insert M into N (32-bit numbers) such that M starts at bit j and
      * ends at bit i
@@ -207,7 +225,7 @@ public class BitManipulation {
         int c = num;
         int c0 = 0;
         int c1 = 0;
-        
+
         while (((c & 1) == 0) && c != 0) {
             c0++;
             c >>= 1;
@@ -328,5 +346,76 @@ public class BitManipulation {
         assertEquals(4, countFlips(213, 28));
         assertEquals(8, countFlips(255, 0));
     }
-    
+
+    /**
+     * Function to swap even bits and odd bits of a number
+     * 
+     * @param num
+     * @return
+     */
+    public int swapBits(int num) {
+        int odd_part = num & 0xaaaaaaaa;
+        int even_part = num & 0x55555555;
+        return (odd_part >>> 1 | even_part << 1);
+    }
+
+    @Test
+    public void testSwapBits() {
+        assertEquals(5, swapBits(10));
+        assertEquals(0, swapBits(0));
+        assertEquals(2, swapBits(1));
+        assertEquals(164, swapBits(88));
+        assertEquals(-1073741825, swapBits(2147483647));
+    }
+
+    /**
+     * Function that draws a horizontal line from point (x1, y) to point (x2, y) on
+     * a screen which is represented by an array of bytes
+     * 
+     * @param screen
+     * @param width
+     * @param x1
+     * @param x2
+     * @param y
+     */
+    public void drawLine(byte[] screen, int width, int x1, int x2, int y) {
+        int first_full_byte = x1 / 8;
+        int start_offset = x1 % 8;
+        int last_full_byte = x2 / 8;
+        int end_offset = x2 % 8;
+
+        if (start_offset != 0)
+            first_full_byte++;
+
+        if (end_offset != 7)
+            last_full_byte--;
+
+        // Set full bytes
+        for (int b = first_full_byte; b <= last_full_byte; b++)
+            screen[(width / 8) * y + b] = (byte) 0xff;
+
+        // Create masks for start and end of line
+        byte start_mask = (byte) (0xff >> start_offset);
+        byte end_mask = (byte) -(0xff >> (end_offset + 1));
+
+        // Set start and end of line
+        // xl and x2 are in the same byte
+        if ((x1 / 8) == (x2 / 8)) {
+            screen[(width / 8) * y + (x1 / 8)] |= ((byte) (start_mask & end_mask));
+        } else {
+            if (start_offset != 0) {
+                int byte_number = (width / 8) * y + first_full_byte - 1;
+                screen[byte_number] |= start_mask;
+            }
+            if (end_offset != 7) {
+                int byte_number = (width / 8) * y + last_full_byte + 1;
+                screen[byte_number] |= end_mask;
+            }
+        }
+    }
+
+    @Test
+    public void testDrawLine() {
+
+    }
 }
