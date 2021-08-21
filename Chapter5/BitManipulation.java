@@ -15,7 +15,7 @@ public class BitManipulation {
      * @return
      */
     public int insertInto(int m, int n, int i, int j) {
-        n = BitManipulationHelpers.clearBitsithroughj(n, i, j);
+        n = BitHelpers.clearBitsithroughj(n, i, j);
         return n + (m << i);
     }
 
@@ -113,10 +113,10 @@ public class BitManipulation {
      * @return
      */
     public int getNextSmallerBruteForce(int num) {
-        int ones = BitManipulationHelpers.countOnes(num);
+        int ones = BitHelpers.countOnes(num);
         while (num > 0) {
             num--;
-            if (BitManipulationHelpers.countOnes(num) == ones)
+            if (BitHelpers.countOnes(num) == ones)
                 return num;
         }
         return 0;
@@ -138,10 +138,10 @@ public class BitManipulation {
      * @return
      */
     public int getNextLargerBruteForce(int num) {
-        int ones = BitManipulationHelpers.countOnes(num);
+        int ones = BitHelpers.countOnes(num);
         while (num > 0) {
             num++;
-            if (BitManipulationHelpers.countOnes(num) == ones)
+            if (BitHelpers.countOnes(num) == ones)
                 return num;
         }
         return num;
@@ -328,5 +328,5 @@ public class BitManipulation {
         assertEquals(4, countFlips(213, 28));
         assertEquals(8, countFlips(255, 0));
     }
-
+    
 }

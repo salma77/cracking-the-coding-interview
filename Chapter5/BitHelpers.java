@@ -1,6 +1,6 @@
 package Chapter5;
 
-public class BitManipulationHelpers {
+public class BitHelpers {
     /**
      * Function to do arithmetic right shift to a number repeatedly
      * 
