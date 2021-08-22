@@ -71,22 +71,23 @@ public class Puzzles {
 
     // The point when using the scale is to number all the bottles from 1...20 then
     // add 1 pill from bottle number 1 and 2 pills from bottle number 2 and so on.
-    // That way
+    // That way we can subtract the total count of bottles and divide by the
+    // difference of 0.1 to get the number of the bottle which outweighs the others
     public int heavyPill(double[] bottles) {
         double sum = 0;
         for (int i = 0; i < bottles.length; i++) {
             sum += bottles[i] * (i + 1);
         }
-        return (int) Math.ceil((sum-210.0)*10);
+        return (int) Math.ceil((sum - 210.0) * 10);
     }
 
     @Test
     public void testHeavyPill() {
         double[] bottles = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1 };
         assertEquals(20, heavyPill(bottles));
-        double [] bottles2 = { 1.1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        double[] bottles2 = { 1.1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
         assertEquals(1, heavyPill(bottles2));
-        double [] bottles3 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        double[] bottles3 = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
         assertEquals(10, heavyPill(bottles3));
     }
 }
